@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User registration</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                background-color: #f2f4f8;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+            .container{
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 10px;
+                width: 350px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            h2{
+                text-align: center;
+                }
+            label{
+                display: block;
+                margin-bottom:12px;
+                
+            }
+            input{
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                box-sizing: border-box;
+            }
+            button{
+                width: 48%;
+                padding: 10px;
+                background-color: #007BFF;
+                color: white;
+                cursor: pointer;
+                margin-top: 15px;
+            }
+            .buttons{
+                display: flex;
+                justify-content: space-between;
+            }
+            .error{
+                color: red;
+                font-size: 0.9em;
+               
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="container">
+            <h2>Registration</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+                <div class = "buttons">
+                    <button type="submit">Save</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
